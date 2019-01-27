@@ -4,4 +4,9 @@
         case {{name}} = {{{value}}}
         {{/enumVars}}
         {{/allowableValues}}
+        case parsed_unknown
+
+        public init(from decoder: Decoder) throws {
+            self = try {{enumName}}(rawValue: decoder.singleValueContainer().decode({{^isContainer}}{{dataType}}{{/isContainer}}{{#isContainer}}String{{/isContainer}}.self)) ?? .parsed_unknown
+        }
     }

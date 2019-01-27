@@ -3,5 +3,10 @@ public enum {{classname}}: {{dataType}}, Codable {
 {{#enumVars}}
     case {{name}} = {{{value}}}
 {{/enumVars}}
+    case parsed_unknown
 {{/allowableValues}}
+
+  public init(from decoder: Decoder) throws {
+      self = try {{classname}}(rawValue: decoder.singleValueContainer().decode({{dataType}}.self)) ?? .parsed_unknown
+  }
 }
