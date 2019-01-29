@@ -15,10 +15,11 @@ open class Swift4TestAPI {
      Get all of the models
      
      - parameter clientId: (query) id that represent the Api client 
+     - parameter queue: The queue on which the completion handler is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getAllModels(clientId: String, completion: @escaping ((_ data: GetAllModelsResult?,_ error: Error?) -> Void)) {
-        getAllModelsWithRequestBuilder(clientId: clientId).execute { (response, error) -> Void in
+    open class func getAllModels(clientId: String, queue: DispatchQueue? = nil, completion: @escaping ((_ data: GetAllModelsResult?,_ error: Error?) -> Void)) {
+        getAllModelsWithRequestBuilder(clientId: clientId).execute(queue: queue) { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
